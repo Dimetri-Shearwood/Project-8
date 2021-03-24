@@ -1,0 +1,67 @@
+{
+    "fighters": [
+        {
+            "name": "Rick Sanchez",
+            "attack": "Laser Guns",
+            "description": "He is a genius scientist whose alcoholism and reckless, nihilistic behavior are a source of concern for his daughter's family, as well as the safety of their son, Morty. ",
+            "origin": "Earth (Dimension C-137)"
+        },
+        {
+            "name": "Mewtwo",
+            "attack": "Telekenesis",
+            "description": "A geneticly engineered pokemon created from a sample of Mew's DNA, with the intention to be the strongest Pokemon ever",
+            "origin": "Earth Guyana Jungle Laboratory"
+        },
+        {
+            "name": "Yusuke Urameshi",
+            "attack": "Spirit Gun",
+            "description": "A Spirit Detective who was killed saving a little boy and was offered a second chance at life with spiritual powers to fight demons and protect the Human World from supernatural threats.",
+            "origin": "Earth"
+        },
+        {
+            "name": "Light Yagami",
+            "attack": "Death Note Book",
+            "description": "a high school student named Light Yagami who finds a Death Note, a book owned by gods of death (Shinigami), that if a person's name is written in it, they will die in the manner the writer specifies or a heart attack if they don't specify. Using it, Light plans to kill all criminals on Earth, create a new perfect world, and rule it as God, while detectives such as L try to find and stop him",
+            "origin": "Earth Japan"
+        },
+        {
+            "name": "Space Ghost",
+            "attack": "Power Bands",
+            "description": "Early adventures of Space Ghost involve him fighting crime and evil across space, along with his sidekicks Jace, Jan and Blip, traveling between worlds in his ship, the Phantom Cruiser.",
+            "origin": "Ghost Planet"
+        },
+        {
+            "name": "Itachi Uchiha",
+            "attack": "Amaterasu",
+            "description": "Itachi Uchiha is a fictional character in the Naruto manga and anime series created by Masashi Kishimoto. Itachi is the older brother of Sasuke Uchiha, and is responsible for killing all the members of their clan, sparing only Sasuke.",
+            "origin": "Earth Konohagakure (Member of Uchiha clan"
+        }
+    ],
+    "tracks": [
+        {
+            "name": "Rick and Morty Theme Song",
+            "url": "https://www.youtube.com/watch?v=wh10k2LPZiI"
+        },
+        {
+            "name": "Mewtwo Theme Song",
+            "url": "https://www.youtube.com/watch?v=2WZsZReahfg"
+        },
+        {
+            "name": "Yu Yu Hakusho Theme Song",
+            "url": "https://www.youtube.com/watch?v=8IDTNHRXhXY"
+        },
+        {
+            "name": "Death Note Opening Song",
+            "url": "https://www.youtube.com/watch?v=K526mjMCDfQ"
+        },
+        {
+            "name": "Space Ghost Theme Intro",
+            "url": "https://www.youtube.com/watch?v=7FRW2bOqvzI"
+        },
+        {
+            "name": "Naruto Theme Song",
+            "url": "https://www.youtube.com/watch?v=jqXUm2YS-mM"
+        }
+
+    ]
+}
