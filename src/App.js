@@ -17,7 +17,7 @@ export default class App extends Component {
 //     const requestOptions = {
 //       method: "GET",
 //     };
-//     fetch("https://over-9000.herokuapp.com/fighters/track/", requestOptions)
+//     fetch("https://over-9000.herokuapp.com/fighters/tracks/", requestOptions)
 //       .then((response) => response.json())
 //       .then((data) => {
 //         this.setState({ fighters: data });
@@ -30,7 +30,23 @@ export default class App extends Component {
 
   }
 
-
+createFighter = (e) => {
+    e.preventDefault()
+    const newFighter = this.state.newFighter
+    console.log(newFighter)
+    const requestOptions = {
+              method: "POST",
+              headers: {
+                  "Content-Type": "application/json"
+              },
+              body: JSON.stringify(newFighter)
+            };
+            fetch("https://over-9000.herokuapp.com/fighters/fighters/", requestOptions)
+              .then((response) => response.json())
+              .then((sendFighter) => {
+                this.setState({ fighters: [...this.state.fighters, sendFighter] });
+              });
+}
 
   componentDidMount() {
     this.getAllFighters();
@@ -41,11 +57,11 @@ export default class App extends Component {
   }
 
   handleAddChange = (e) => {
-      
+      e.preventDefault()
       this.setState({newFighter: {...this.state.newFighter, [e.target.name]:e.target.value}})
   }
   render() {
-      console.log(this.state.selected)
+      console.log(this.state.newFighter)
 
     const { name, attack, description, origin} = this.state.selected
 
@@ -57,17 +73,17 @@ export default class App extends Component {
         <div>App</div>
         <div>
            <h1>Create New Fighter</h1> 
-           <form>
-               <input type="text" name="" placeholder="Name" onChange={this.handleAddChange}/>
-               <input type="text" name="" placeholder="Attack" onChange={this.handleAddChange}/>
-               <input type="text" name="" placeholder="Description" onChange={this.handleAddChange}/>
-               <input type="text" name="" placeholder="Origin" onChange={this.handleAddChange}/>
+           <form onSubmit={this.createFighter}>
+               <input type="text" name="name" placeholder="Name" value={this.state.newFighter.name} onChange={this.handleAddChange}/>
+               <input type="text" name="attack" placeholder="Attack" value={this.state.newFighter.attack} onChange={this.handleAddChange}/>
+               <input type="text" name="description" placeholder="Description" value={this.state.newFighter.description} onChange={this.handleAddChange}/>
+               <input type="text" name="origin" placeholder="Origin" value={this.state.newFighter.origin} onChange={this.handleAddChange}/>
                <button type="submit">Add Fighter</button>
             </form>
 
         </div>
         <div>
-            <h1>Detail</h1>
+            <h1>About</h1>
             { this.state.selected.name && <div>
                 <h2>Name: {name}</h2>
                 <h3>Attack: {attack}</h3>
@@ -76,7 +92,7 @@ export default class App extends Component {
                 </div>}
         </div>
         <div>
-          <h1>Index</h1>
+          <h1>Fighters</h1>
           {this.state.fighters.map(fighters =>
             <div onClick={()=>this.getSelected(fighters)} key={fighters.id}>{fighters.name}</div>
           )}
