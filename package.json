@@ -2,7 +2,6 @@
   "name": "fighters_front",
   "version": "1.0.0",
   "description": "PRoject 8 front end",
-  "main": "index.js",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Dimetri-Shearwood/Project-8.git"
@@ -44,8 +43,7 @@
   },
   "bugs": {
     "url": "https://github.com/Dimetri-Shearwood/Project-8/issues"
-  },
-  "homepage": "https://github.com/Dimetri-Shearwood/Project-8#readme"
+  }
 }
 
 
