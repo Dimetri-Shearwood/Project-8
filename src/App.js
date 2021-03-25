@@ -8,7 +8,8 @@ export default class App extends Component {
     this.state = {
       fighters: fighters,
       tracks: tracks,
-      selected: {}
+      selected: {},
+      newFighter: {}
     };
   }
 // Server
@@ -39,10 +40,16 @@ export default class App extends Component {
       this.setState({selected: selectedData})
   }
 
+  handleAddChange = (e) => {
+      
+      this.setState({newFighter: {...this.state.newFighter, [e.target.name]:e.target.value}})
+  }
   render() {
       console.log(this.state.selected)
 
     const { name, attack, description, origin} = this.state.selected
+
+    // const { name, url} = this.state.tracks
     
 
     return (
@@ -51,10 +58,10 @@ export default class App extends Component {
         <div>
            <h1>Create New Fighter</h1> 
            <form>
-               <input type="text" name="" placeholder="Name" />
-               <input type="text" name="" placeholder="Attack" />
-               <input type="text" name="" placeholder="Description" />
-               <input type="text" name="" placeholder="Origin" />
+               <input type="text" name="" placeholder="Name" onChange={this.handleAddChange}/>
+               <input type="text" name="" placeholder="Attack" onChange={this.handleAddChange}/>
+               <input type="text" name="" placeholder="Description" onChange={this.handleAddChange}/>
+               <input type="text" name="" placeholder="Origin" onChange={this.handleAddChange}/>
                <button type="submit">Add Fighter</button>
             </form>
 
