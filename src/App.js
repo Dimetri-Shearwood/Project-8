@@ -1,6 +1,7 @@
 import "./App.css";
 import React, { Component } from "react";
 import {fighters, tracks} from "./data.json"
+import 'bulma/css/bulma.min.css'
 
 export default class App extends Component {
   constructor() {
