@@ -62,11 +62,22 @@ export default class App extends Component {
         this.setState({ newFighter: { ...this.state.newFighter, [e.target.name]: e.target.value } })
     }
 
+    deleteFighter = (id) => {
+      console.log("delete:" ,id)
+      fetch("https://over-9000.herokuapp.com/fighters/fighters/" +id,{method: "DELETE"})
+      .then(response => response.json())
+      .then(deleteResp=>{
+        const updateFighter = this.state.fighters.filter(fighter=>fighter._id!=id)
+        console.log(updateFighter)
+        this.setState({selected: {}, fighters: updateFighter})
+      })
+
+    }
 
     render() {
         console.log(this.state.newFighter)
 
-        const { name, attack, description, origin } = this.state.selected
+        const { name, attack, description, origin, _id } = this.state.selected
 
         // const { name, url} = this.state.tracks
 
@@ -108,7 +119,7 @@ export default class App extends Component {
                             <li>Attack: {attack}</li>
                             <li>Description: {description}</li>
                             <li>Place of Origin: {origin}</li>
-                            <button className="button is-danger is-outlined is-small" type="delete" onClick={this.handleDelete}>Delete Fighter</button>
+                            <button className="button is-danger is-outlined is-small" type="delete" onClick={this.deleteFighter(this.state._id)}>Delete Fighter</button>
                         </ul>}
                     </div>
                 </div>
