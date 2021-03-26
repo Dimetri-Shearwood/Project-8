@@ -10,20 +10,21 @@ export default class App extends Component {
             fighters: fighters,
             tracks: tracks,
             selected: {},
-            newFighter: {}
+            newFighter: {}, 
+            editFighter: {}
         };
     }
     // Server
-    //   getAllFighters = () => {
-    //     const requestOptions = {
-    //       method: "GET",
-    //     };
-    //     fetch("https://over-9000.herokuapp.com/fighters/tracks/", requestOptions)
-    //       .then((response) => response.json())
-    //       .then((data) => {
-    //         this.setState({ fighters: data });
-    //       });
-    //   };
+      getAllFighters = () => {
+        const requestOptions = {
+          method: "GET",
+        };
+        fetch("https://over-9000.herokuapp.com/fighters/tracks/", requestOptions)
+          .then((response) => response.json())
+          .then((data) => {
+            this.setState({ fighters: data });
+          });
+      };
 
 
     //Local 
@@ -73,7 +74,9 @@ export default class App extends Component {
       })
 
     }
-
+    getEditFighter = (id) => {
+      console.log(id)
+    }
     render() {
         console.log(this.state.newFighter)
 
@@ -109,7 +112,19 @@ export default class App extends Component {
                     </form>
 
                 </div>
-
+                <div>
+                  <h1>Update</h1>
+                  {this.state.editFighter._id && <div>
+                  <form>
+                    <input type="text" name="name" placeholder="Name" value={this.state.editFighter.name} />
+                    <input type="text" name="attack" placeholder="Attack" value={this.state.editFighter.attack} />
+                    <input type="text" name="description" placeholder="Description" value={this.state.editFighter.description} />
+                    <input type="text" name="origin" placeholder="Origin" value={this.state.editFighter.origin} />
+                    <button type="submit">Edit</button>
+                    </form>
+                    </div>}
+                    
+                </div>
                 <div className="box container is-max-desktop">
 
                     <div className="content">
@@ -119,7 +134,8 @@ export default class App extends Component {
                             <li>Attack: {attack}</li>
                             <li>Description: {description}</li>
                             <li>Place of Origin: {origin}</li>
-                            <button className="button is-danger is-outlined is-small" type="delete" onClick={this.deleteFighter(this.state._id)}>Delete Fighter</button>
+                            <button className="button is-danger is-outlined is-small" type="delete" onClick={this.deleteFighter(this.state._id)}>Delete</button>
+                            <button className="button is-danger is-outlined is-small" type="delete" onClick={this.getEditFighter(this.state._id)}>Edit</button>
                         </ul>}
                     </div>
                 </div>
