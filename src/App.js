@@ -93,7 +93,7 @@ export default class App extends Component {
                             <label className="label">Origin:</label>
                             <input className="input" type="text" name="origin" placeholder="Origin" value={this.state.newFighter.origin} onChange={this.handleAddChange} />
                         </div>
-                        <button className="button is-primary is-small ml-2" type="submit">Add Fighter</button>
+                        <button className="button is-outlined is-primary is-small ml-2" type="submit">Add Fighter</button>
 
                     </form>
 
@@ -108,7 +108,7 @@ export default class App extends Component {
                             <li>Attack: {attack}</li>
                             <li>Description: {description}</li>
                             <li>Place of Origin: {origin}</li>
-                            <button className="button is-danger is-small" type="delete" onClick={this.handleDelete}>Delete Fighter</button>
+                            <button className="button is-danger is-outlined is-small" type="delete" onClick={this.handleDelete}>Delete Fighter</button>
                         </ul>}
                     </div>
                 </div>
