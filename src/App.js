@@ -74,15 +74,31 @@ export default class App extends Component {
       })
 
     }
-    getEditFighter = (id) => {
-      console.log(id)
+    getEditFighter = (editFighter) => {
+      this.setState({editFighter})
     }
     render() {
         console.log(this.state.newFighter)
+        let fighter1
+        if(this.state.fighters.length > 0){
+          fighter1 = (<b>{this.state.fighters}</b>)
+        }
+        else {
+          fighter1 = "Loading..."
+        }
+
+
+
 
         const { name, attack, description, origin, _id } = this.state.selected
 
         // const { name, url} = this.state.tracks
+
+
+        
+        
+
+
 
 
         return (
@@ -114,7 +130,7 @@ export default class App extends Component {
                 </div>
                 <div>
                   <h1>Update</h1>
-                  {this.state.editFighter._id && <div>
+                  {this.state.editFighter && <div>
                   <form>
                     <input type="text" name="name" placeholder="Name" value={this.state.editFighter.name} />
                     <input type="text" name="attack" placeholder="Attack" value={this.state.editFighter.attack} />
@@ -134,6 +150,7 @@ export default class App extends Component {
                             <li>Attack: {attack}</li>
                             <li>Description: {description}</li>
                             <li>Place of Origin: {origin}</li>
+                          
                             <button className="button is-danger is-outlined is-small" type="delete" onClick={this.deleteFighter(this.state._id)}>Delete</button>
                             <button className="button is-danger is-outlined is-small" type="delete" onClick={this.getEditFighter(this.state._id)}>Edit</button>
                         </ul>}
