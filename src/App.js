@@ -27,6 +27,18 @@ export default class App extends Component {
                 this.setState({ fighters: data });
             });
     };
+    getAllTracks = () => {
+        const requestOptions = {
+            method: "GET",
+        };
+        fetch("https://over-9000.herokuapp.com/fighters/tracks/", requestOptions)
+            .then((response) => response.json())
+            .then((data) => {
+                console.log(data[0])
+                this.setState({ tracks: data });
+            });
+
+    };
 
     //Local
 
@@ -51,6 +63,7 @@ export default class App extends Component {
 
     componentDidMount() {
         this.getAllFighters();
+        this.getAllTracks()
     }
 
     getSelected = (selectedData) => {
@@ -115,7 +128,7 @@ export default class App extends Component {
         this.setState({ showUpdate: !this.state.showUpdate })
     }
     render() {
-        const { name, attack, description, origin, _id } = this.state.selected;
+        const { fighterName, attack, description, origin, _id } = this.state.selected;
 
         // const { name, url} = this.state.tracks
 
@@ -190,7 +203,7 @@ export default class App extends Component {
 
                     {this.state.editFighter &&
                         this.state.showUpdate &&
-                        <div className="box container is-max-desktop">
+                        <div className="box container is-max-desktop" >
                             <form className="field" onSubmit={(e) => this.editFighter(e)}>
                                 <div className="columns">
                                     <div className="control column">
@@ -250,7 +263,7 @@ export default class App extends Component {
                         <h1 className="title is-3">About</h1>
                         {this.state.selected.name &&
                             <ul>
-                                <li>Name: {name}</li>
+                                <li>Name: {fighterName}</li>
                                 <li>Attack: {attack}</li>
                                 <li>Description: {description}</li>
                                 <li>Place of Origin: {origin}</li>
@@ -261,10 +274,11 @@ export default class App extends Component {
                                     onClick={() => this.deleteFighter(this.state.selected._id)}
                                 >
                                     Delete
-                </button>
+                                </button>
                             </ul>
                         }
                     </div>
+
                 </div>
                 <div className="box container is-max-desktop">
                     <h1 className="title is-3">Fighters</h1>
@@ -274,6 +288,12 @@ export default class App extends Component {
                         </div>
                     ))}
                 </div>
+                {this.state.tracks.map((track)=> (
+                    <div className="track" >
+                        <a href={track.url} className="href">{track.name}</a>
+                    </div>
+                ))}
+                
             </div>
         );
     }
