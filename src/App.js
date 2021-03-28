@@ -127,7 +127,7 @@ export default class App extends Component {
         e.preventDefault()
         this.setState({ showUpdate: !this.state.showUpdate })
     }
-    isActive = (e) =>{
+    isActive = (e) => {
         e.preventDefault()
         this.setState({ isActive: !this.state.isActive })
         console.log(this.state.isActive)
@@ -141,7 +141,6 @@ export default class App extends Component {
             <div className="App">
                 <div className="title is-1">Mortal Kombat applicants</div>
                 <button onClick={this.handleShowCreate} className="button is-dark is-outlined is-small">{this.state.showCreate ? `hide panel` : `create a new fighter`}</button>
-                <button onClick={this.handleShowUpdate} className="button is-dark is-outlined is-small">{this.state.showUpdate ? `hide panel` : `edit a new fighter`}</button>
                 {this.state.showCreate &&
                     <div className="box container is-max-desktop">
                         <h1 className="title is-3">Create New Fighter</h1>
@@ -204,12 +203,15 @@ export default class App extends Component {
                 }
                 <div>
 
-                    <h1>Update</h1>
+
 
                     {this.state.editFighter &&
                         this.state.showUpdate &&
+
                         <div className="box container is-max-desktop" >
+                            <h1 className="subtitle">Update</h1>
                             <form className="field" onSubmit={(e) => this.editFighter(e)}>
+
                                 <div className="columns">
                                     <div className="control column">
                                         <input
@@ -253,12 +255,13 @@ export default class App extends Component {
                                         onChange={this.handleEditChange}
                                     />
                                 </div>
+
                                 <button
                                     className="button is-dark is-outlined is-small"
                                     type="submit"
                                 >
                                     Edit
-                </button>
+                                </button>
                             </form>
                         </div>
                     }
@@ -279,6 +282,12 @@ export default class App extends Component {
                                     onClick={() => this.deleteFighter(this.state.selected._id)}
                                 >
                                     Delete
+                                </button>
+                                <button
+                                    onClick={this.handleShowUpdate}
+                                    className="button is-dark is-outlined is-small"
+                                >
+                                    {this.state.showUpdate ? `hide panel` : `edit this fighter`}
                                 </button>
                             </ul>
                         }
