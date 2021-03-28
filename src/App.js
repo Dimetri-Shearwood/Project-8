@@ -14,6 +14,7 @@ export default class App extends Component {
             editFighter: {},
             showCreate: false,
             showUpdate: false,
+            isActive: false
         };
     }
     // Server
@@ -34,7 +35,6 @@ export default class App extends Component {
         fetch("https://over-9000.herokuapp.com/fighters/tracks/", requestOptions)
             .then((response) => response.json())
             .then((data) => {
-                console.log(data[0])
                 this.setState({ tracks: data });
             });
 
@@ -126,6 +126,11 @@ export default class App extends Component {
     handleShowUpdate = (e) => {
         e.preventDefault()
         this.setState({ showUpdate: !this.state.showUpdate })
+    }
+    isActive = (e) =>{
+        e.preventDefault()
+        this.setState({ isActive: !this.state.isActive })
+        console.log(this.state.isActive)
     }
     render() {
         const { fighterName, attack, description, origin, _id } = this.state.selected;
@@ -288,12 +293,26 @@ export default class App extends Component {
                         </div>
                     ))}
                 </div>
-                {this.state.tracks.map((track)=> (
-                    <div className="track" >
-                        <a href={track.url} className="href">{track.name}</a>
+
+                <div className={this.state.isActive ? `is-active dropdown` : `dropdown`}>
+                    <div className="dropdown-trigger">
+                        <button className="button" aria-haspopup="true" onClick={this.isActive} aria-controls="dropdown-menu">
+                            <span>Tracks</span>
+                            <span className="icon is-small">
+                                <i className="fas fa-angle-down" aria-hidden="true"></i>
+                            </span>
+                        </button>
                     </div>
-                ))}
-                
+                    <div className="dropdown-menu" id="dropdown-menu" role="menu">
+                        <div className="dropdown-content">
+                            {this.state.tracks.map((track) => (
+                                <div className="track dropdown-item" >
+                                    <a href={track.url}>{track.name}</a>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+                </div>
             </div>
         );
     }
