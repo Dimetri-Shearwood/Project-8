@@ -14,6 +14,7 @@ export default class App extends Component {
             editFighter: {},
             showCreate: false,
             showUpdate: false,
+            isActive: false
         };
     }
     // Server
@@ -26,6 +27,17 @@ export default class App extends Component {
             .then((data) => {
                 this.setState({ fighters: data });
             });
+    };
+    getAllTracks = () => {
+        const requestOptions = {
+            method: "GET",
+        };
+        fetch("https://over-9000.herokuapp.com/fighters/tracks/", requestOptions)
+            .then((response) => response.json())
+            .then((data) => {
+                this.setState({ tracks: data });
+            });
+
     };
 
     //Local
@@ -51,6 +63,7 @@ export default class App extends Component {
 
     componentDidMount() {
         this.getAllFighters();
+        this.getAllTracks()
     }
 
     getSelected = (selectedData) => {
@@ -114,8 +127,13 @@ export default class App extends Component {
         e.preventDefault()
         this.setState({ showUpdate: !this.state.showUpdate })
     }
+    isActive = (e) => {
+        e.preventDefault()
+        this.setState({ isActive: !this.state.isActive })
+        console.log(this.state.isActive)
+    }
     render() {
-        const { name, attack, description, origin, _id } = this.state.selected;
+        const { fighterName, attack, description, origin, _id } = this.state.selected;
 
         // const { name, url} = this.state.tracks
 
@@ -123,7 +141,6 @@ export default class App extends Component {
             <div className="App">
                 <div className="title is-1">Mortal Kombat applicants</div>
                 <button onClick={this.handleShowCreate} className="button is-dark is-outlined is-small">{this.state.showCreate ? `hide panel` : `create a new fighter`}</button>
-                <button onClick={this.handleShowUpdate} className="button is-dark is-outlined is-small">{this.state.showUpdate ? `hide panel` : `edit a new fighter`}</button>
                 {this.state.showCreate &&
                     <div className="box container is-max-desktop">
                         <h1 className="title is-3">Create New Fighter</h1>
@@ -186,12 +203,15 @@ export default class App extends Component {
                 }
                 <div>
 
-                    <h1>Update</h1>
+
 
                     {this.state.editFighter &&
                         this.state.showUpdate &&
-                        <div className="box container is-max-desktop">
+
+                        <div className="box container is-max-desktop" >
+                            <h1 className="subtitle">Update</h1>
                             <form className="field" onSubmit={(e) => this.editFighter(e)}>
+
                                 <div className="columns">
                                     <div className="control column">
                                         <input
@@ -235,12 +255,13 @@ export default class App extends Component {
                                         onChange={this.handleEditChange}
                                     />
                                 </div>
+
                                 <button
                                     className="button is-dark is-outlined is-small"
                                     type="submit"
                                 >
                                     Edit
-                </button>
+                                </button>
                             </form>
                         </div>
                     }
@@ -250,7 +271,7 @@ export default class App extends Component {
                         <h1 className="title is-3">About</h1>
                         {this.state.selected.name &&
                             <ul>
-                                <li>Name: {name}</li>
+                                <li>Name: {fighterName}</li>
                                 <li>Attack: {attack}</li>
                                 <li>Description: {description}</li>
                                 <li>Place of Origin: {origin}</li>
@@ -261,10 +282,17 @@ export default class App extends Component {
                                     onClick={() => this.deleteFighter(this.state.selected._id)}
                                 >
                                     Delete
-                </button>
+                                </button>
+                                <button
+                                    onClick={this.handleShowUpdate}
+                                    className="button is-dark is-outlined is-small"
+                                >
+                                    {this.state.showUpdate ? `hide panel` : `edit this fighter`}
+                                </button>
                             </ul>
                         }
                     </div>
+
                 </div>
                 <div className="box container is-max-desktop">
                     <h1 className="title is-3">Fighters</h1>
@@ -273,6 +301,26 @@ export default class App extends Component {
                             {fighters.name}
                         </div>
                     ))}
+                </div>
+
+                <div className={this.state.isActive ? `is-active dropdown` : `dropdown`}>
+                    <div className="dropdown-trigger">
+                        <button className="button" aria-haspopup="true" onClick={this.isActive} aria-controls="dropdown-menu">
+                            <span>Tracks</span>
+                            <span className="icon is-small">
+                                <i className="fas fa-angle-down" aria-hidden="true"></i>
+                            </span>
+                        </button>
+                    </div>
+                    <div className="dropdown-menu" id="dropdown-menu" role="menu">
+                        <div className="dropdown-content">
+                            {this.state.tracks.map((track) => (
+                                <div className="track dropdown-item" >
+                                    <a href={track.url}>{track.name}</a>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
                 </div>
             </div>
         );
