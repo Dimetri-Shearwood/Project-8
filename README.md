@@ -1,4 +1,4 @@
-# Mortal Kombat new comers
+# Mortal Kombat New Fighters
 
 ## About this app
 
